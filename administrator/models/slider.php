@@ -92,8 +92,15 @@ class CcgsliderModelSlider extends JModelAdmin
 	public function getItem($pk = null)
 	{
 		if ($item = parent::getItem($pk)) {
-
-			//Do any procesing on fields here if needed
+            $id = intval($item->id);
+            $db = JFactory::getDbo();
+            $query = $db->getQuery(true);
+            $query->select('*')
+                  ->from('#__ccgslider_slider_mapping')
+                 ->where('sliderid =' . $id);
+            $db->setQuery($query);
+            $picture = $db->loadObjectList();
+            $item->picture= $picture;
 
 		}
 
