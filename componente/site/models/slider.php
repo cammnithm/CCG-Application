@@ -85,6 +85,16 @@ class CcgsliderModelSlider extends JModelItem {
 		if ( isset($this->_item->created_by) ) {
 			$this->_item->created_by_name = JFactory::getUser($this->_item->created_by)->name;
 		}
+        //Load Picture Data
+        $id = intval($this->_item->id);
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select('*')
+            ->from('#__ccgslider_slider_mapping')
+            ->where('sliderid =' . $id);
+        $db->setQuery($query);
+        $picture = $db->loadObjectList();
+        $this->_item->picture= $picture;
 
         return $this->_item;
     }

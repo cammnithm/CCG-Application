@@ -240,12 +240,19 @@ class CcgsliderModelSlider extends JModelAdmin
               ->where('id =' . $id);
         $db->setQuery($deletequery);
         $db->execute();
-        $columns = array('sliderid', 'file');
+        $columns = array('sliderid', 'file','params');
         $addquery =  $db->getQuery(true);
         $addquery->insert('#__ccgslider_slider_mapping')->columns($db->quoteName($columns));
         foreach($files as $file){
             $doc = $db->quote("$folder/$file");
-            $addquery->values($id . ", $doc" );
+            $filearray = explode(".", $file);
+            $picname = $filearray[0];
+            $picformat =  $filearray[1];
+            $picparams = array();
+            $picparams['name'] =  $picname;
+            $picparams['format'] = $picformat;
+            $picjson = $db->quote(json_encode($picparams));
+            $addquery->values($id . ", $doc, $picjson" );
 
         }
 
