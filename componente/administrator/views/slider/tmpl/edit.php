@@ -82,6 +82,17 @@ $document->addStyleSheet('components/com_ccgslider/assets/css/ccgslider.css');
 				<div class="control-label"><?php echo $this->form->getLabel('file'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('file'); ?></div>
 			</div>
+            <div class="control-group">
+                <div class="row">
+                    <?php foreach ($this->item->picture as $file){?>
+                    <div class="col-md-4">
+                        <a href="<?php echo JUri::root(true) . "/images/" .$file->file; ?>" class="img-responsive">
+                            <img src="<?php echo JUri::root(true) . "/images/" .$file->file; ?>" alt="<?php echo $file->file; ?>" class="img-responsive"style="width:150px;height:150px">
+                        </a>
+                    </div>
+                    <?php  } ?>
+                    </div>
+            </div>
 
 				<?php if (!empty($this->item->file)) : ?>
 						<a href="<?php echo JRoute::_(JUri::base() . 'components' . DIRECTORY_SEPARATOR . 'com_ccgslider' . DIRECTORY_SEPARATOR . 'image' .DIRECTORY_SEPARATOR . $this->item->file, false);?>"><?php echo JText::_("COM_CCGSLIDER_VIEW_FILE"); ?></a>
