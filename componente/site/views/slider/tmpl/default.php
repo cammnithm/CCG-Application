@@ -51,10 +51,10 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_ccgslider'
         <!-- use jssor.slider.mini.js (40KB) instead for release -->
         
         
-        <script src="<?php echo JURI::root(true); ?>components/com_ccgslider/assets/JssorSlider/js/jquery.min.js" type="text/javascript"></script>
+        <script src="<?php echo JURI::root(true); ?>/components/com_ccgslider/assets/JssorSlider/js/jquery.min.js" type="text/javascript"></script>
         <!-- jssor.slider.mini.js = (jssor.js + jssor.slider.js) -->
-        <script src="<?php echo JURI::root(true); ?>components/com_ccgslider/assets/JssorSlider/js/jssor.js" type="text/javascript"></script>
-        <script src="<?php echo JURI::root(true); ?>components/com_ccgslider/assets/JssorSlider/js/jssor.slider.min.js" type="text/javascript"></script>
+        <script src="<?php echo JURI::root(true); ?>/components/com_ccgslider/assets/JssorSlider/js/jssor.js" type="text/javascript"></script>
+        <script src="<?php echo JURI::root(true); ?>/components/com_ccgslider/assets/JssorSlider/js/jssor.slider.min.js" type="text/javascript"></script>
         <script>
             function appendImages(imageList) {
                 $('#jssorSlidesContainer').empty();
@@ -158,8 +158,9 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_ccgslider'
 
 
                 $.ajax({
-                    url: "service.php",
+                    url: "index.php?option=com_ccgslider&task=slider.getSliderImage&format=json&id=<?php echo $this->item->id; ?>",
                     success: function (data) {
+                        console.log(data);
                         appendImages(data);
 
                         var jssor_slider1 = new $JssorSlider$("slider1_container", options);

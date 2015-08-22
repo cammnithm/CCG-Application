@@ -20,7 +20,7 @@ class CcgsliderControllerSlider extends CcgsliderController {
     public function getSliderImage(){
         $app  = JFactory::getApplication()->input;
         $id = intval($app->get('id'));
-        $model = $this->getModel();
+        $model = $this->getModel('Slider');
         $data = $model->getData($id);
         $picture_data = $data->picture;
         $picture_data_json= array();
@@ -38,6 +38,6 @@ class CcgsliderControllerSlider extends CcgsliderController {
 
             $picture_data_json[] = $pic_item;
         }
-       return json_encode( $picture_data_json);
+       echo json_encode( $picture_data_json);
     }
 }
